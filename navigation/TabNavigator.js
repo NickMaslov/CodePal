@@ -35,8 +35,8 @@ export default createBottomTabNavigator(
     swipeEnabled: false,
     tabBarOptions: {
       style: {
-        height: 100,
-        backgroundColor: '#fff',
+        height: 50,
+        backgroundColor: '#1ff',
       },
     }
   }
