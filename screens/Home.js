@@ -1,35 +1,27 @@
 import React from 'react';
 import styles from '../styles';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
+import {login } from '../redux/actions';
 
-import {
-  Text,
-  View
-} from 'react-native';
 
-class Home extends React.Component {
-  state = {}
+import { Text, View, Alert } from 'react-native';
 
-  componentWillMount() {
-    this.props.dispatch(login("heyaaa"))
+export default class Home extends React.Component {
+  state = {};
+
+  componentDidMount() {
+
   }
+
+
 
   render() {
     return (
-     <View style={styles.container}>
-      <Text>
-      {this.props.user}
-      </Text>
-     </View>
-    )
+      <View style={styles.container}>
+        <Text>Home</Text>
+      </View>
+    );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user
-  };
-}
 
-export default connect(mapStateToProps)(Home);
