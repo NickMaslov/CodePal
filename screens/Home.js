@@ -43,14 +43,47 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.dispatch(getCards());
   }
-  handleYup (card) {
-    firebase.database().ref('cards/' + this.props.user.id + '/swipes').update({ [card.id]: true });
+  handleYup(card) {
+    firebase
+      .database()
+      .ref('cards/' + this.props.user.id + '/swipes')
+      .update({ [card.id]: true });
   }
 
-  handleNope (card) {
-    firebase.database().ref('cards/' + this.props.user.id + '/swipes').update({ [card.id]: false });
+  handleNope(card) {
+    firebase
+      .database()
+      .ref('cards/' + this.props.user.id + '/swipes')
+      .update({ [card.id]: false });
   }
 
+  checkMatch(card) {
+    firebase
+      .database()
+      .ref('cards/' + card.id + '/swipes/' + this.props.user.id)
+      .once('value', snap => {
+        if (snap.val() == true) {
+          var me = {
+            id: this.props.user.id,
+            photoUrl: this.props.user.photoUrl,
+            name: this.props.user.name,
+          };
+          var user = {
+            id: card.id,
+            photoUrl: card.photoUrl,
+            name: card.name,
+          };
+          firebase
+            .database()
+            .ref('cards/' + this.props.user.id + '/chats/' + card.id)
+            .set({ user: user });
+          firebase
+            .database()
+            .ref('cards/' + card.id + '/chats/' + this.props.user.id)
+            .set({ user: me });
+        }
+      });
+  }
 
   render() {
     return (
@@ -74,7 +107,7 @@ function mapStateToProps(state) {
   return {
     loggedIn: state.loggedIn,
     cards: state.cards,
-    user: state.user
+    user: state.user,
   };
 }
 

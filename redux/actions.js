@@ -53,8 +53,8 @@ export function uploadImages(images) {
     ImagePicker.launchImageLibraryAsync({ allowsEditing: false }).then(function(
       result
     ) {
-      var array = images;
-      if (result.uri != undefined) {
+      let array = images;
+      if (result.uri !== undefined) {
         const file = {
           uri: result.uri,
           name: result.uri,
@@ -63,7 +63,7 @@ export function uploadImages(images) {
 
         const options = {
           keyPrefix: 'uploads/',
-          bucket: 'BUCKETNAME',
+          bucket: 'code-pal',
           region: 'us-east-1',
           accessKey: aws.accessKey,
           secretKey: aws.secretKey,
