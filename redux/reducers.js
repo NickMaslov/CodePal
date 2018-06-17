@@ -11,9 +11,7 @@ const initialState = {
     notification: false,
     show: false,
     report: false,
-    swipes: {
-
-    },
+    swipes: {},
     token: ' ',
   },
 };
@@ -23,6 +21,17 @@ export default function reducers(state = initialState, action) {
     case 'LOGIN': {
       return { ...state, user: action.user, loggedIn: action.loggedIn };
     }
+    case 'LOGOUT': {
+      return { ...state, loggedIn: action.loggedIn };
+    }
+    case 'UPLOAD_IMAGES': {
+      return { ...state, user: { ...state.user, images: action.payload } };
+    }
+    case 'UPDATE_ABOUT':
+      return {
+        ...state,
+        user: { ...state.user, aboutMe: action.payload },
+      };
     default:
       return state;
   }
