@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
     margin: 15,
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  card: {
+    width: deviceWidth*.9,
+    height: deviceHeight*.7,
   }
 });
 

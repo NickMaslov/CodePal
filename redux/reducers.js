@@ -1,5 +1,6 @@
 const initialState = {
   loggedIn: false,
+  cards: [],
   user: {
     id: '',
     photoUrl: '',
@@ -31,6 +32,11 @@ export default function reducers(state = initialState, action) {
       return {
         ...state,
         user: { ...state.user, aboutMe: action.payload },
+      };
+    case 'GET_CARDS':
+      return {
+        ...state,
+        cards: action.payload,
       };
     default:
       return state;

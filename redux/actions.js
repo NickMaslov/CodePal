@@ -121,3 +121,20 @@ export function updateAbout(value) {
     }, 3000);
   };
 }
+
+export function getCards() {
+  return function(dispatch) {
+    firebase
+      .database()
+      .ref('cards')
+      .once('value', snap => {
+        var items = [];
+        snap.forEach(child => {
+          let item = child.val();
+          item.id = child.key;
+          items.push(item);
+        });
+        dispatch({ type: 'GET_CARDS', payload: items });
+      });
+  };
+}
