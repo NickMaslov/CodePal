@@ -1,31 +1,10 @@
 import React from 'react';
-import styles from '../styles';
 import { connect } from 'react-redux';
-import { getCards } from '../redux/actions';
 import SwipeCards from 'react-native-swipe-cards';
-
-import { Text, View, Image } from 'react-native';
-
-class Card extends React.Component {
-  render() {
-    return (
-      <View>
-        <Image style={styles.card} source={{ uri: this.props.image }} />
-        <Text>{this.props.name}</Text>
-      </View>
-    );
-  }
-}
-
-class NoMoreCards extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text>No more cards</Text>
-      </View>
-    );
-  }
-}
+import * as firebase from 'firebase';
+import { getCards } from '../redux/actions';
+import Cards from '../components/Cards';
+import NoCards from '../components/NoCards';
 
 class Home extends React.Component {
   state = {
@@ -64,28 +43,26 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.dispatch(getCards());
   }
+  handleYup (card) {
+    firebase.database().ref('cards/' + this.props.user.id + '/swipes').update({ [card.id]: true });
+  }
 
-  handleYup(card) {
-    console.log(`Yup for ${card.name}`);
+  handleNope (card) {
+    firebase.database().ref('cards/' + this.props.user.id + '/swipes').update({ [card.id]: false });
   }
-  handleNope(card) {
-    console.log(`Nope for ${card.name}`);
-  }
-  handleMaybe(card) {
-    console.log(`Maybe for ${card.name}`);
-  }
+
 
   render() {
     return (
       <SwipeCards
-        cards={this.state.cards}
+        cards={this.props.cards}
         stack={false}
-        renderCard={cardData => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards />}
+        renderCard={cardData => <Cards {...cardData} />}
+        renderNoMoreCards={() => <NoCards />}
         showYup={false}
         showNope={false}
-        handleYup={this.handleYup}
-        handleNope={this.handleNope}
+        handleYup={this.handleYup.bind(this)}
+        handleNope={this.handleNope.bind(this)}
         handleMaybe={this.handleMaybe}
         hasMaybeAction={false}
       />
@@ -97,6 +74,7 @@ function mapStateToProps(state) {
   return {
     loggedIn: state.loggedIn,
     cards: state.cards,
+    user: state.user
   };
 }
 
