@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center',
+    // textAlign: 'center',
   },
   img: {
     width: 90,

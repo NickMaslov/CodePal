@@ -28,10 +28,6 @@ class Profile extends React.Component {
     this.props.dispatch(uploadImages(this.props.user.images));
   }
 
-  // componentDidMount() {
-  //   this.props.dispatch(uploadImages(this.props.user.images));
-  // }
-
   render() {
     return (
       <ScrollView>
