@@ -2,6 +2,24 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "facebookAppId":"252070428882815",
-    "facebookDisplayName": "CodePal"
+    "facebookDisplayName": "CodePal",
+    "icon": "./assets/CodePal.png",
+    "version": "1.0",
+  	"name": "CodePal",
+  	"slug": "codepal",
+    "splash": {
+		  "image": "./assets/CodePal.png",
+		  "backgroundColor": "#fff",
+		  "resizeMode": "contain"
+		},
+    "ios": {
+      "bundleIdentifier": "com.codepal.codepal",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Allow CodePal to use your location in order to find new people to hang out with in your area"
+      }
+    },
+    "android": {
+      "package": "com.codepal.codepal"
+    }
   }
 }

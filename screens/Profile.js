@@ -24,6 +24,7 @@ class Profile extends React.Component {
       deleteImage(this.self.props.user.images, this.key)
     );
   }
+
   addImage() {
     this.props.dispatch(uploadImages(this.props.user.images));
   }
@@ -31,7 +32,7 @@ class Profile extends React.Component {
   render() {
     return (
       <ScrollView>
-        <View style={[styles.container, styles.center]}>
+        <View style={[styles.container, styles.center, styles.border]}>
           <View style={styles.container}>
             <Image
               style={styles.img}
@@ -41,7 +42,7 @@ class Profile extends React.Component {
               {this.props.user.name}
             </Text>
           </View>
-          <View style={styles.imgRow}>
+          <View style={[styles.imgRow, styles.center]}>
             {this.props.user.images.map((uri, key) => {
               return (
                 <TouchableOpacity
@@ -59,7 +60,7 @@ class Profile extends React.Component {
               <Ionicons name="ios-add" size={75} style={styles.color} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.bold}>About</Text>
+          <Text style={styles.bold}>Skills</Text>
           <TextInput
             style={styles.textInput}
             multiline={true}
@@ -76,10 +77,10 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
   return {
     user: state.user,
   };
-};
+}
 
 export default connect(mapStateToProps)(Profile);

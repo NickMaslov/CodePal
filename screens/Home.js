@@ -1,53 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import SwipeCards from 'react-native-swipe-cards';
+import styles from '../styles';
 import * as firebase from 'firebase';
+import { connect } from 'react-redux';
 import { getCards } from '../redux/actions';
-import Cards from '../components/Cards';
-import NoCards from '../components/NoCards';
+import SwipeCards from 'react-native-swipe-cards';
+import Cards from '../components/Cards.js';
+import NoCards from '../components/NoCards.js';
+
+import { Text, View, Image } from 'react-native';
 
 class Home extends React.Component {
-  state = {
-    cards: [
-      {
-        name: 'fran',
-        image: 'https://media.giphy.com/media/GfXFVHUzjlbOg/giphy.gif',
-      },
-      {
-        name: 'jackie',
-        image: 'https://media.giphy.com/media/irTuv1L1T34TC/giphy.gif',
-      },
-      {
-        name: 'phil',
-        image: 'https://media.giphy.com/media/LkLL0HJerdXMI/giphy.gif',
-      },
-      {
-        name: 'jacks',
-        image: 'https://media.giphy.com/media/fFBmUMzFL5zRS/giphy.gif',
-      },
-      {
-        name: 'mellow',
-        image: 'https://media.giphy.com/media/oDLDbBgf0dkis/giphy.gif',
-      },
-      {
-        name: 'frank',
-        image: 'https://media.giphy.com/media/7r4g8V2UkBUcw/giphy.gif',
-      },
-      {
-        name: 'timmmay',
-        image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.gif',
-      },
-    ],
-  };
-
   componentDidMount() {
-    this.props.dispatch(getCards());
+    this.props.dispatch(getCards(this.props.user.geocode));
   }
+
   handleYup(card) {
     firebase
       .database()
       .ref('cards/' + this.props.user.id + '/swipes')
       .update({ [card.id]: true });
+    this.checkMatch(card);
   }
 
   handleNope(card) {
@@ -62,7 +34,7 @@ class Home extends React.Component {
       .database()
       .ref('cards/' + card.id + '/swipes/' + this.props.user.id)
       .once('value', snap => {
-        if (snap.val() == true) {
+        if (snap.val() === true) {
           var me = {
             id: this.props.user.id,
             photoUrl: this.props.user.photoUrl,
@@ -105,7 +77,6 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.loggedIn,
     cards: state.cards,
     user: state.user,
   };

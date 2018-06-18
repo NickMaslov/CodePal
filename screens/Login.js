@@ -4,10 +4,10 @@ import RootNavigator from '../navigation/RootNavigator';
 import { connect } from 'react-redux';
 import { login } from '../redux/actions';
 import * as firebase from 'firebase';
-import firebaseConfig from '../config/firebase';
+import firebaseConfig from '../config/firebase.js';
 firebase.initializeApp(firebaseConfig);
 
-import { Text, View, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Alert } from 'react-native';
 
 class Login extends React.Component {
   state = {};
@@ -28,16 +28,18 @@ class Login extends React.Component {
       }
     );
     if (type === 'success') {
+      // Build Firebase credential with the Facebook access token.
       const credential = await firebase.auth.FacebookAuthProvider.credential(
         token
       );
 
+      // Sign in with credential from the Facebook user.
       firebase
         .auth()
         .signInAndRetrieveDataWithCredential(credential)
-        .catch(error => {
+        .catch(() => {
+          // Handle Errors here.
           Alert.alert('Try Again');
-          console.log(error);
         });
     }
   };
@@ -48,8 +50,9 @@ class Login extends React.Component {
     } else {
       return (
         <View style={[styles.container, styles.center]}>
+          {/* <Image source={require('../assets/CodePal.png')} /> */}
           <TouchableOpacity onPress={this.login.bind(this)}>
-            <Text>Login</Text>
+            <Text style={styles.button}>Facebook Login</Text>
           </TouchableOpacity>
         </View>
       );
@@ -57,10 +60,10 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
   return {
     loggedIn: state.loggedIn,
   };
-};
+}
 
 export default connect(mapStateToProps)(Login);

@@ -1,12 +1,16 @@
 import React from 'react';
+import styles from '../styles';
+
 import { Text, View } from 'react-native';
 
-const NoMoreCards = () => {
-  return (
-    <View>
-      <Text>No more cards</Text>
-    </View>
-  );
-};
+class NoCards extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>No more cards</Text>
+      </View>
+    );
+  }
+}
 
-export default NoMoreCards;
+export default NoCards;

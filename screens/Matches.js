@@ -8,6 +8,7 @@ import { Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 class Matches extends React.Component {
   state = {
     chats: [],
+    count: 0,
   };
 
   componentDidMount() {
@@ -17,7 +18,7 @@ class Matches extends React.Component {
       .on('value', snap => {
         var items = [];
         snap.forEach(child => {
-          item = child.val();
+          let item = child.val();
           items.push(item);
         });
         this.setState({ chats: items.reverse() });
@@ -29,12 +30,17 @@ class Matches extends React.Component {
       <View style={styles.container}>
         <ScrollView>
           {this.state.chats.map(uri => {
+            // console.log('#$#$#$',uri.id);
             return (
-              <TouchableOpacity style={styles.imgRow}>
+              <TouchableOpacity
+                key={++this.state.count}
+                style={[styles.imgRow, styles.border]}
+                onPress={() =>
+                  this.props.navigation.navigate('Chat', { user: uri.user })
+                }
+              >
                 <Image style={styles.img} source={{ uri: uri.user.photoUrl }} />
-                <Text style={[styles.bold, styles.center]}>
-                  {uri.user.name}
-                </Text>
+                <Text style={styles.bold}>{uri.user.name}</Text>
               </TouchableOpacity>
             );
           })}
