@@ -53,38 +53,43 @@ export function logout() {
 
 export function uploadImages(images) {
   return function(dispatch) {
-   ImagePicker.launchImageLibraryAsync({ allowsEditing: false, aspect: [4, 3] }).then(function(
-      result
-    ) {
-    console.log('res%*here');
+    Permissions.askAsync(Permissions.CAMERA_ROLL).then(function(result) {
+      if (result) {
+        ImagePicker.launchImageLibraryAsync({ allowsEditing: false }).then(
+          function(result) {
+            console.log('#######res%*here',result);
 
-      var array = images;
-      if (result.uri !== undefined) {
-        const file = {
-          uri: result.uri,
-          name: result.uri,
-          type: 'image/png',
-        };
+            var array = images;
+            if (result.uri !== undefined) {
+              const file = {
+                uri: result.uri,
+                name: result.uri,
+                type: 'image/png',
+              };
 
-        const options = {
-          keyPrefix: 'uploads/',
-          bucket: 'code-pal',
-          region: 'us-east-1',
-          accessKey: aws.accessKey,
-          secretKey: aws.secretKey,
-          successActionStatus: 201,
-        };
+              const options = {
+                keyPrefix: 'uploads/',
+                bucket: 'code-pal',
+                region: 'us-east-2',
+                accessKey: aws.accessKey,
+                secretKey: aws.secretKey,
+                successActionStatus: 201,
+              };
+              console.log('******response', file, options);
+              RNS3.put(file, options).then(function(response) {
 
-        RNS3.put(file, options).then(function(response) {
-          if (response.status === 201) {
-            array.push(response.body.postResponse.location);
-            firebase
-              .database()
-              .ref('cards/' + firebase.auth().currentUser.uid + '/images')
-              .set(array);
-            dispatch({ type: 'UPLOAD_IMAGES', payload: array });
+                if (response.status === 201) {
+                  array.push(response.body.postResponse.location);
+                  firebase
+                    .database()
+                    .ref('cards/' + firebase.auth().currentUser.uid + '/images')
+                    .set(array);
+                  dispatch({ type: 'UPLOAD_IMAGES', payload: array });
+                }
+              });
+            }
           }
-        });
+        );
       }
     });
   };
@@ -135,7 +140,7 @@ export function getCards(geocode) {
       .orderByChild('geocode')
       .equalTo(geocode)
       .once('value', snap => {
-        console.log('------',snap);
+        console.log('------', snap);
         var items = [];
         snap.forEach(child => {
           let item = child.val();

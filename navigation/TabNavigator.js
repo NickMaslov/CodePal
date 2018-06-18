@@ -13,40 +13,40 @@ export default createMaterialTopTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Profile',
-        tabBarIcon: ({ focused }) => (
-          <Ionicons
-            style={styles.nav}
-            color={'#df4723'}
-            name={focused ? 'ios-person' : 'ios-person-outline'}
-            size={40}
-          />
-        ),
+        // tabBarIcon: ({ focused }) => (
+        //   <Ionicons
+        //     style={styles.nav}
+        //     color={'#df4723'}
+        //     name={focused ? 'ios-person' : 'ios-person-outline'}
+        //     size={40}
+        //   />
+        // ),
       },
     },
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ focused }) => (
-          <Image
-            style={styles.logo}
-            source={require('../assets/CodePal.png')}
-          />
-        ),
+        tabBarLabel: 'Search',
+        // tabBarIcon: ({ focused }) => (
+        //   <Image
+        //     style={styles.logo}
+        //     source={require('../assets/CodePal.png')}
+        //   />
+        // ),
       },
     },
     Matches: {
       screen: Matches,
       navigationOptions: {
         tabBarLabel: 'Chats',
-        tabBarIcon: ({ focused }) => (
-          <Ionicons
-            style={styles.nav}
-            color={'#df4723'}
-            name={focused ? 'ios-chatbubbles' : 'ios-chatbubbles-outline'}
-            size={40}
-          />
-        ),
+        // tabBarIcon: ({ focused }) => (
+        //   <Ionicons
+        //     style={styles.nav}
+        //     color={'#df4723'}
+        //     name={focused ? 'ios-chatbubbles' : 'ios-chatbubbles-outline'}
+        //     size={40}
+        //   />
+        // ),
       },
     },
   },
