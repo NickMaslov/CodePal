@@ -57,7 +57,7 @@ export function uploadImages(images) {
       if (result) {
         ImagePicker.launchImageLibraryAsync({ allowsEditing: false }).then(
           function(result) {
-            console.log('#######res%*here',result);
+            // console.log('#######res%*here',result);
 
             var array = images;
             if (result.uri !== undefined) {
@@ -75,7 +75,7 @@ export function uploadImages(images) {
                 secretKey: aws.secretKey,
                 successActionStatus: 201,
               };
-              console.log('******response', file, options);
+              // console.log('******response', file, options);
               RNS3.put(file, options).then(function(response) {
 
                 if (response.status === 201) {
@@ -128,7 +128,7 @@ export function updateAbout(value) {
         .database()
         .ref('cards/' + firebase.auth().currentUser.uid)
         .update({ aboutMe: value });
-    }, 3000);
+    }, 500);
   };
 }
 
@@ -195,7 +195,7 @@ export function sendNotification(id, name, text) {
       .database()
       .ref('cards/' + id)
       .once('value', snap => {
-        if (snap.val().token != null) {
+        if (snap.val().token !== null) {
           return fetch('https://exp.host/--/api/v2/push/send', {
             method: 'POST',
             headers: {

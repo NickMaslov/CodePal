@@ -9,15 +9,15 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   color: {
-  	color: '#df4723'
+    color: '#df4723',
   },
   logo: {
     width: 100,
     height: 55,
-    marginTop: 70
+    marginTop: 20,
   },
   nav: {
-    marginTop: 70
+    marginTop: 20,
   },
   center: {
     alignItems: 'center',
@@ -25,41 +25,50 @@ var styles = StyleSheet.create({
     // textAlign: 'center'
   },
   img: {
-  	width: 80,
-  	height: 80,
-  	borderRadius: 40,
-  	margin: 10,
-  	backgroundColor: '#fff',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    margin: 10,
+    backgroundColor: '#fff',
   },
   imgRow: {
-		flexWrap: 'wrap',
-		flexDirection: 'row',
-		padding: 15,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    padding: 15,
   },
   textInput: {
     width: deviceWidth,
     padding: 15,
     backgroundColor: '#fff',
-    height: 100
+    height: 100,
+  },
+  input: {
+    width: deviceWidth * 0.9,
+    height: 30,
+    marginLeft: deviceWidth * 0.05,
+    marginRight: deviceWidth * 0.05,
+    backgroundColor: '#abcdef',
+    borderColor: 'lightgray',
+    borderWidth: 1
   },
   bold: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   button: {
-	  borderRadius: 15,
-	  borderWidth: 1,
-	  borderColor: '#df4723',
-	  textAlign: 'center',
-	  color: '#df4723',
-	  padding: 15,
-	  margin: 15,
-	  fontSize: 18,
-	  fontWeight: 'bold',
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#df4723',
+    textAlign: 'center',
+    color: '#df4723',
+    padding: 15,
+    margin: 15,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   card: {
-    width: deviceWidth*.9,
-    height: deviceHeight*.75,
+    width: deviceWidth * 0.9,
+    height: deviceHeight * 0.75,
     borderRadius: 50,
   },
   cardDescription: {
@@ -76,6 +85,6 @@ var styles = StyleSheet.create({
     borderTopColor: '#bbb',
     borderTopWidth: 0.5,
   },
-})
+});
 
-module.exports = styles
+module.exports = styles;

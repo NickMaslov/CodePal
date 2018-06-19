@@ -60,7 +60,7 @@ export default createMaterialTopTabNavigator(
     swipeEnabled: false,
     tabBarOptions: {
       style: {
-        height: 75,
+        height: 45,
       },
     },
   }

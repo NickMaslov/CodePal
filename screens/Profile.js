@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 
 class Profile extends React.Component {
+
   deleteImage() {
     this.self.props.dispatch(
       deleteImage(this.self.props.user.images, this.key)

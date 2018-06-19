@@ -7,12 +7,20 @@ import SwipeCards from 'react-native-swipe-cards';
 import Cards from '../components/Cards.js';
 import NoCards from '../components/NoCards.js';
 
-import { Text, View, Image } from 'react-native';
+import { TextInput, View, Image } from 'react-native';
 
 class Home extends React.Component {
+  state = {
+    search: '',
+  };
+
   componentDidMount() {
     this.props.dispatch(getCards(this.props.user.geocode));
   }
+
+  handleInput = search => {
+    this.setState(search);
+  };
 
   handleYup(card) {
     firebase
@@ -59,18 +67,26 @@ class Home extends React.Component {
 
   render() {
     return (
-      <SwipeCards
-        cards={this.props.cards}
-        stack={false}
-        renderCard={cardData => <Cards {...cardData} />}
-        renderNoMoreCards={() => <NoCards />}
-        showYup={false}
-        showNope={false}
-        handleYup={this.handleYup.bind(this)}
-        handleNope={this.handleNope.bind(this)}
-        handleMaybe={this.handleMaybe}
-        hasMaybeAction={false}
-      />
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder="Search"
+          placeholderTextColor="gray"
+          onChange={this.handleInput}
+        />
+        <SwipeCards
+          cards={this.props.cards}
+          stack={false}
+          renderCard={cardData => <Cards {...cardData} />}
+          renderNoMoreCards={() => <NoCards />}
+          showYup={false}
+          showNope={false}
+          handleYup={this.handleYup.bind(this)}
+          handleNope={this.handleNope.bind(this)}
+          handleMaybe={this.handleMaybe}
+          hasMaybeAction={false}
+        />
+      </View>
     );
   }
 }
