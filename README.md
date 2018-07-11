@@ -1,3 +1,24 @@
+## Codepal
+
+Mobile chatting app
+
+Find coding pals in your area, chat, meet up, create cool projects together
+
+## Tools:
+
+React, redux, react-redux
+React native, Expo
+Firebase, AWS
+
+react-native-swipe-cards
+react-native-gifted-chat
+latlon-geohash
+
+
+
+
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
